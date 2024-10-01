@@ -20,17 +20,17 @@ public class User implements UserDetails {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @NotBlank(message = "Email is required")
+    @NotBlank(message = "E-mail é obrigatório")
     @Column(unique = true)
     private String email;
 
-    @NotBlank(message = "Name is required")
+    @NotBlank(message = "Nome é obrigatório")
     private String name;
 
-    @NotBlank(message = "Phone Number is required")
+    @NotBlank(message = "Número de teleforne é obrigatório")
     private String phoneNumber;
 
-    @NotBlank(message = "Password is required")
+    @NotBlank(message = "Senha é obrigatório")
     private String password;
 
     private String role;

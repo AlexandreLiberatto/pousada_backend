@@ -18,16 +18,16 @@ public class Booking {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @NotNull(message = "check in date is required")
+    @NotNull(message = "Obrigatório informar a data de entrada!")
     private LocalDate checkInDate;
 
-    @Future(message = "check out date must be in the future")
+    @Future(message = "Obrigatório informar a data de saída!")
     private LocalDate checkOutDate;
 
-    @Min(value = 1, message = "Number of adults must not be less that 1")
+    @Min(value = 1, message = "O número de adultos não deve ser inferior a 1")
     private int numOfAdults;
 
-    @Min(value = 0, message = "Number of children must not be less that 0")
+    @Min(value = 0, message = "O número de crianças não deve ser inferior a 0")
     private int numOfChildren;
 
     private int totalNumOfGuest;

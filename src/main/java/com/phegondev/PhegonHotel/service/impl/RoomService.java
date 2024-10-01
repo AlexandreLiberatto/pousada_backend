@@ -43,12 +43,12 @@ public class RoomService implements IRoomService {
             Room savedRoom = roomRepository.save(room);
             RoomDTO roomDTO = Utils.mapRoomEntityToRoomDTO(savedRoom);
             response.setStatusCode(200);
-            response.setMessage("successful");
+            response.setMessage("bem-sucedido");
             response.setRoom(roomDTO);
 
         } catch (Exception e) {
             response.setStatusCode(500);
-            response.setMessage("Error saving a room " + e.getMessage());
+            response.setMessage("Erro ao salvar uma sala " + e.getMessage());
         }
         return response;
     }
@@ -66,12 +66,12 @@ public class RoomService implements IRoomService {
             List<Room> roomList = roomRepository.findAll(Sort.by(Sort.Direction.DESC, "id"));
             List<RoomDTO> roomDTOList = Utils.mapRoomListEntityToRoomListDTO(roomList);
             response.setStatusCode(200);
-            response.setMessage("successful");
+            response.setMessage("bem-sucedido");
             response.setRoomList(roomDTOList);
 
         } catch (Exception e) {
             response.setStatusCode(500);
-            response.setMessage("Error saving a room " + e.getMessage());
+            response.setMessage("Erro ao salvar uma sala " + e.getMessage());
         }
         return response;
     }
@@ -84,14 +84,14 @@ public class RoomService implements IRoomService {
             roomRepository.findById(roomId).orElseThrow(() -> new OurException("Room Not Found"));
             roomRepository.deleteById(roomId);
             response.setStatusCode(200);
-            response.setMessage("successful");
+            response.setMessage("bem-sucedido");
 
         } catch (OurException e) {
             response.setStatusCode(404);
             response.setMessage(e.getMessage());
         } catch (Exception e) {
             response.setStatusCode(500);
-            response.setMessage("Error saving a room " + e.getMessage());
+            response.setMessage("Erro ao salvar uma sala " + e.getMessage());
         }
         return response;
     }
@@ -115,7 +115,7 @@ public class RoomService implements IRoomService {
             RoomDTO roomDTO = Utils.mapRoomEntityToRoomDTO(updatedRoom);
 
             response.setStatusCode(200);
-            response.setMessage("successful");
+            response.setMessage("bem-sucedido");
             response.setRoom(roomDTO);
 
         } catch (OurException e) {
@@ -123,7 +123,7 @@ public class RoomService implements IRoomService {
             response.setMessage(e.getMessage());
         } catch (Exception e) {
             response.setStatusCode(500);
-            response.setMessage("Error saving a room " + e.getMessage());
+            response.setMessage("Erro ao salvar uma sala " + e.getMessage());
         }
         return response;
     }
@@ -136,7 +136,7 @@ public class RoomService implements IRoomService {
             Room room = roomRepository.findById(roomId).orElseThrow(() -> new OurException("Room Not Found"));
             RoomDTO roomDTO = Utils.mapRoomEntityToRoomDTOPlusBookings(room);
             response.setStatusCode(200);
-            response.setMessage("successful");
+            response.setMessage("bem-sucedido");
             response.setRoom(roomDTO);
 
         } catch (OurException e) {
@@ -144,7 +144,7 @@ public class RoomService implements IRoomService {
             response.setMessage(e.getMessage());
         } catch (Exception e) {
             response.setStatusCode(500);
-            response.setMessage("Error saving a room " + e.getMessage());
+            response.setMessage("Erro ao salvar uma sala " + e.getMessage());
         }
         return response;
     }
@@ -157,12 +157,12 @@ public class RoomService implements IRoomService {
             List<Room> availableRooms = roomRepository.findAvailableRoomsByDatesAndTypes(checkInDate, checkOutDate, roomType);
             List<RoomDTO> roomDTOList = Utils.mapRoomListEntityToRoomListDTO(availableRooms);
             response.setStatusCode(200);
-            response.setMessage("successful");
+            response.setMessage("bem-sucedido");
             response.setRoomList(roomDTOList);
 
         } catch (Exception e) {
             response.setStatusCode(500);
-            response.setMessage("Error saving a room " + e.getMessage());
+            response.setMessage("Erro ao salvar uma sala " + e.getMessage());
         }
         return response;
     }
@@ -175,7 +175,7 @@ public class RoomService implements IRoomService {
             List<Room> roomList = roomRepository.getAllAvailableRooms();
             List<RoomDTO> roomDTOList = Utils.mapRoomListEntityToRoomListDTO(roomList);
             response.setStatusCode(200);
-            response.setMessage("successful");
+            response.setMessage("bem-sucedido");
             response.setRoomList(roomDTOList);
 
         } catch (OurException e) {
@@ -183,7 +183,7 @@ public class RoomService implements IRoomService {
             response.setMessage(e.getMessage());
         } catch (Exception e) {
             response.setStatusCode(500);
-            response.setMessage("Error saving a room " + e.getMessage());
+            response.setMessage("Erro ao salvar uma sala " + e.getMessage());
         }
         return response;
     }

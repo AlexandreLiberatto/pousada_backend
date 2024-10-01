@@ -38,15 +38,15 @@ public class BookingService implements IBookingService {
 
         try {
             if (bookingRequest.getCheckOutDate().isBefore(bookingRequest.getCheckInDate())) {
-                throw new IllegalArgumentException("Check in date must come after check out date");
+                throw new IllegalArgumentException("A data de check-in deve ser posterior à data de check-out");
             }
-            Room room = roomRepository.findById(roomId).orElseThrow(() -> new OurException("Room Not Found"));
-            User user = userRepository.findById(userId).orElseThrow(() -> new OurException("User Not Found"));
+            Room room = roomRepository.findById(roomId).orElseThrow(() -> new OurException("Quarto não encontrado"));
+            User user = userRepository.findById(userId).orElseThrow(() -> new OurException("Usuário não encontrado"));
 
             List<Booking> existingBookings = room.getBookings();
 
             if (!roomIsAvailable(bookingRequest, existingBookings)) {
-                throw new OurException("Room not Available for selected date range");
+                throw new OurException("Quarto não disponível para o intervalo de datas selecionado");
             }
 
             bookingRequest.setRoom(room);
@@ -55,7 +55,7 @@ public class BookingService implements IBookingService {
             bookingRequest.setBookingConfirmationCode(bookingConfirmationCode);
             bookingRepository.save(bookingRequest);
             response.setStatusCode(200);
-            response.setMessage("successful");
+            response.setMessage("bem-sucedido");
             response.setBookingConfirmationCode(bookingConfirmationCode);
 
         } catch (OurException e) {
@@ -64,7 +64,7 @@ public class BookingService implements IBookingService {
 
         } catch (Exception e) {
             response.setStatusCode(500);
-            response.setMessage("Error Saving a booking: " + e.getMessage());
+            response.setMessage("Erro ao salvar uma reserva: " + e.getMessage());
 
         }
         return response;
@@ -80,7 +80,7 @@ public class BookingService implements IBookingService {
             Booking booking = bookingRepository.findByBookingConfirmationCode(confirmationCode).orElseThrow(() -> new OurException("Booking Not Found"));
             BookingDTO bookingDTO = Utils.mapBookingEntityToBookingDTOPlusBookedRooms(booking, true);
             response.setStatusCode(200);
-            response.setMessage("successful");
+            response.setMessage("bem-sucedido");
             response.setBooking(bookingDTO);
 
         } catch (OurException e) {
@@ -89,7 +89,7 @@ public class BookingService implements IBookingService {
 
         } catch (Exception e) {
             response.setStatusCode(500);
-            response.setMessage("Error Finding a booking: " + e.getMessage());
+            response.setMessage("Erro ao encontrar uma reserva: " + e.getMessage());
 
         }
         return response;
@@ -104,7 +104,7 @@ public class BookingService implements IBookingService {
             List<Booking> bookingList = bookingRepository.findAll(Sort.by(Sort.Direction.DESC, "id"));
             List<BookingDTO> bookingDTOList = Utils.mapBookingListEntityToBookingListDTO(bookingList);
             response.setStatusCode(200);
-            response.setMessage("successful");
+            response.setMessage("bem-sucedido");
             response.setBookingList(bookingDTOList);
 
         } catch (OurException e) {
@@ -113,7 +113,7 @@ public class BookingService implements IBookingService {
 
         } catch (Exception e) {
             response.setStatusCode(500);
-            response.setMessage("Error Getting all bookings: " + e.getMessage());
+            response.setMessage("Erro ao obter todas as reservas: " + e.getMessage());
 
         }
         return response;
@@ -128,7 +128,7 @@ public class BookingService implements IBookingService {
             bookingRepository.findById(bookingId).orElseThrow(() -> new OurException("Booking Does Not Exist"));
             bookingRepository.deleteById(bookingId);
             response.setStatusCode(200);
-            response.setMessage("successful");
+            response.setMessage("bem-sucedido");
 
         } catch (OurException e) {
             response.setStatusCode(404);
@@ -136,7 +136,7 @@ public class BookingService implements IBookingService {
 
         } catch (Exception e) {
             response.setStatusCode(500);
-            response.setMessage("Error Cancelling a booking: " + e.getMessage());
+            response.setMessage("Erro ao cancelar uma reserva: " + e.getMessage());
 
         }
         return response;
